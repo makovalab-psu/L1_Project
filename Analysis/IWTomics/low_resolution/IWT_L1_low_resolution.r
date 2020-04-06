@@ -307,6 +307,7 @@ result_mean$Rep_Timing
 result_mean$Average_Recom_Rate
 result_mean$Telomere_Hexamer
 
+### IWTomics tests for median and quantiles (not shown in the current study)
 # result_median=rep(M,nFeatures(regionsFeatures))
 # names(result_median)=idFeatures(regionsFeatures)
 # for(idFeature in idFeatures(regionsFeatures)){

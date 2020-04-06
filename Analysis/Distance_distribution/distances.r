@@ -1,11 +1,11 @@
-setwd("~/Google_Drive/L1/L1_Project/Analysis/Distance_distribution/")
+setwd("~/Google_Drive/L1_Project/Analysis/Distance_distribution/")
 
 require(GenomicRanges)
 
 
 
 # DE NOVO
-L1denovo  <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1denovo_BWA_17037_reads.bed', header = FALSE, sep = '\t')
+L1denovo  <- read.table('~/Google_Drive/L1_Project/Datasets/L1_genomic_coordinates/L1denovo_BWA_17037_reads.bed', header = FALSE, sep = '\t')
 names(L1denovo) <- c('chr', 'start', 'end', 'strand', 'barcode', 'site', 'annot')
 L1denovo$start[L1denovo$strand == '+'] <- L1denovo$end[L1denovo$strand == '+']
 L1denovo$end[L1denovo$strand == '-'] <- L1denovo$start[L1denovo$strand == '-']
@@ -13,13 +13,13 @@ L1denovo <- makeGRangesFromDataFrame(L1denovo, starts.in.df.are.0based = TRUE, k
 L1denovo <- sort(L1denovo, ignore.strand = TRUE)
 
 # POLYMORPHIC
-L1Pol <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1Pol_Ewing_LiftedFromHG18.interval', header = FALSE, sep = '\t')
+L1Pol <- read.table('~/Google_Drive/L1_Project/Datasets/L1_genomic_coordinates/L1Pol_Ewing_LiftedFromHG18.interval', header = FALSE, sep = '\t')
 names(L1Pol) <- c('chr', 'start', 'end', 'strand', 'annot')
 L1Pol <- makeGRangesFromDataFrame(L1Pol, starts.in.df.are.0based = TRUE, keep.extra.columns = TRUE)
 L1Pol <- sort(L1Pol, ignore.strand = TRUE)
 
 # HUMAN SPECIFIC
-L1HS <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1HS_clean_sorted_1205.bed', header = FALSE, sep = '\t')
+L1HS <- read.table('~/Google_Drive/L1_Project/Datasets/L1_genomic_coordinates/L1HS_clean_sorted_1205.bed', header = FALSE, sep = '\t')
 names(L1HS) <- c('chr', 'start', 'end', 'strand', 'annot')
 L1HS <- makeGRangesFromDataFrame(L1HS, starts.in.df.are.0based = TRUE, keep.extra.columns = TRUE)
 L1HS <- sort(L1HS, ignore.strand = TRUE)

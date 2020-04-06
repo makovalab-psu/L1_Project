@@ -6,7 +6,7 @@ require(fda.usc)
 # biocLite("IWTomics")
 require(IWTomics)
 
-setwd('~/Google_Drive/l1/L1_Project/Analysis/sFLR/')
+setwd('~/Google_Drive/L1_Project/Analysis/sFLR/')
 
 # Select functional predictors by the localization table created based on the bosplots & IWT results
 localization_all<-read.table("localization_table.txt",header=TRUE)
@@ -32,7 +32,7 @@ func_6<-as.vector(localization_all$test6)
 ####Here for comparisons 4,5 and 6, we also changed the comparisons' directions to L1pol vs denovo, L1hs vs denovo, L1pol vs L1hs
 for (r in 1:10){
   r=1#Since random 1 was selected in our analysis, here we only load random 1 for illustration purpose
-  setwd(paste("~/Google_Drive/l1/L1_Project/Analysis/sFLR/random",r,sep=''))
+  setwd(paste("~/Google_Drive/L1_Project/Analysis/sFLR/random",r,sep=''))
   load(file = paste("L1_transformed_random_",r,'.RData',sep=''))
   #result_mean
   # test<-result_mean@features$H2AFZ_signal[[1]]

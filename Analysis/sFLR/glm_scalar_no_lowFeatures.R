@@ -1,5 +1,5 @@
 ## Logistic regression on L1 data: scalar predictors 
-setwd('~/Google_Drive/L1/L1_Project/Analysis/sFLR/')
+setwd('~/Google_Drive/L1_Project/Analysis/sFLR/')
 # Load the transformed data
 # source("https://bioconductor.org/biocLite.R")
 # biocLite("IWTomics")

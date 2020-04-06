@@ -1,12 +1,12 @@
 
-setwd('~/Google_Drive/L1/L1_Project/Analysis/sFLR/select_random_samples/')
+setwd('~/Google_Drive/L1_Project/Analysis/sFLR/select_random_samples/')
 sum_comp1_randoms<-as.data.frame(matrix())
 sum_comp4_randoms<-as.data.frame(matrix())
 sum_comp5_randoms<-as.data.frame(matrix())
 
 for (r in 1:10){
   r=1#Since random 1 was selected in our analysis, here we only load random 1 for illustration purpose
-  setwd(paste("~/Google_Drive/L1/L1_Project/Analysis/sFLR/random",r,sep=''))
+  setwd(paste("~/Google_Drive/L1_Project/Analysis/sFLR/random",r,sep=''))
   r_comp1_scal<-read.csv(file='comp1_scalar_logit_sum.csv')
   r_comp1_func<-read.csv(file='comp1_func_logit_sum.csv')
   r_comp1<-rbind(r_comp1_scal[,c(3,4,7)],r_comp1_func[,c(3,4,6)])

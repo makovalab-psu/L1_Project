@@ -1,7 +1,7 @@
 ##Karyotype plots for L1s from three datasets
 ##Backup scripts for jupytor notebook (L1s_Karyotype_SizeCorrelation.ipynb)
 
-setwd("~/Google_Drive/L1/L1_Project/Analysis/Karyotype_plots/")
+setwd("~/Google_Drive/L1_Project/Analysis/Karyotype_plots/")
 
 library("rtracklayer")
 library(karyoploteR)
@@ -81,8 +81,22 @@ pp$data1height <- 60
 kp<-plotKaryotype(genome="hg19", main="Genome-wide distribution of all L1s in the study",plot.type=1, plot.params = pp, cex=1.6) ## Set genome assembly
 #kpPlotRegions(kp, gains,col="red",avoid.overlapping=FALSE ) ## Choose color
 getCytobandColors(color.table=NULL, color.schema=c("only.centromeres"))
-kpPlotRegions(kp, r0 = 0, r1 = 2,gains_denovo,col="red") ## Choose color
-kpPlotRegions(kp, r0 = 0, r1 = 0.8,gains_pol, col="blue") ## Choose color 
-kpPlotRegions(kp, r0 = 0, r1 = 0.8,gains_hs, col="green") ## Choose color 
+kpPlotRegions(kp, r0 = 0, r1 = 1.5,gains_denovo,col="red") ## Choose color
+kpPlotRegions(kp, r0 = 0, r1 = 0.1,gains_pol, col="blue") ## Choose color 
+kpPlotRegions(kp, r0 = 0, r1 = 0.1,gains_hs, col="green") ## Choose color 
 kpAddCytobandLabels(kp,cex=0.8)
 dev.off()
+
+# #Overlay densities instead of numbers for all L1s in the same karyotype plot
+# pdf('L1_ALL_density.pdf',width=15, height=13)
+# pp <- getDefaultPlotParams(plot.type=1)
+# pp$leftmargin <- 0.1
+# pp$data1height <- 60
+# kp<-plotKaryotype(genome="hg19", main="Genome-wide distribution of all L1s in the study",plot.type=1, plot.params = pp, cex=1.6) ## Set genome assembly
+# #kpPlotRegions(kp, gains,col="red",avoid.overlapping=FALSE ) ## Choose color
+# getCytobandColors(color.table=NULL, color.schema=c("only.centromeres"))
+# kpPlotDensity(kp, r0 = 0, r1 = 0.5,gains_denovo,col="red")
+# kpPlotDensity(kp, r0 = 0, r1 = 0.5,gains_pol, col="blue") ## Choose color 
+# kpPlotDensity(kp, r0 = 0, r1 = 0.5,gains_hs, col="green") ## Choose color 
+# kpAddCytobandLabels(kp,cex=0.8)
+# dev.off()

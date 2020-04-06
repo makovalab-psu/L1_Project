@@ -1,5 +1,5 @@
 # L1_Project
-This repository contains the L1 datasets used in the study, code and processed data for the paper in revision "Human L1 Transposition Dynamics Unraveled with Functional Data Analysis"
+This repository contains the L1 datasets used in the study, code and processed data for the paper in revision "Human L1 Transposition Dynamics Unraveled with Functional Data Analysis".
 
 ## The study is broadly separated into three major parts
 1. Genome-wide visualization and distance analysis of the three L1 datasets (de novo L1s, polymorphic L1s, and human-specific L1s) included in the study

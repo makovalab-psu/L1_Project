@@ -1,3 +1,9 @@
+setwd("~/Google_Drive/L1_Project/Analysis/IWTomics/low_resolution/")
+require(IWTomics)
+
+# function to create IWTomicsData object with low resolution features
+source('IWTomicsData_low_resolution.r') 
+# function to perform IWTomics test on low resolution scalar features
 test_scalar <- function(data1,data2,mu=0,statistics='mean',probs=0.5,paired=FALSE,B=1000){
   # data1 and data2 matrices with 1 row
   
@@ -14,7 +20,7 @@ test_scalar <- function(data1,data2,mu=0,statistics='mean',probs=0.5,paired=FALS
   }else{
     exact=(B>=choose(n,n1))
   }
-
+  
   p=nrow(data1)
   result=list(test='2pop',mu=mu)
   data=cbind(data1,data2)
@@ -127,19 +133,9 @@ test_scalar <- function(data1,data2,mu=0,statistics='mean',probs=0.5,paired=FALS
   return(list(result=result,no.pval=no.pval))
 }
 
-#setwd("C:/Users/MarziaAngela/Google Drive/L1/IWTomics analysis")
-setwd("~/Downloads/IWT_lowres/")
-require(IWTomics)
-
-
-source('IWTomicsData_low_resolution.r') # function to create IWTomicsData object with low resolution features
-
 # files with datasets and features
-datasets=read.table("~/Downloads/IWT_lowres/datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
-features_datasets=read.table("~/Downloads/IWT_lowres/features_datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
-
-#datasets=read.table("C:/Users/MarziaAngela/Google Drive/L1/datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
-#features_datasets=read.table("C:/Users/MarziaAngela/Google Drive/L1/features_datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
+datasets=read.table("~/Google_Drive/L1_Project/Analysis/IWTomics/low_resolution/datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
+features_datasets=read.table("~/Google_Drive/L1_Project/Analysis/IWTomics/low_resolution/features_datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
 
 # select low-resoution features
 features_datasets=features_datasets[56:62,]
@@ -168,30 +164,6 @@ validObject(regionsFeatures)
 lengthRegions(regionsFeatures)
 save(regionsFeatures,file='L1_low_resolution_autosomes.RData')
 
-# # select only chrX
-# load('L1_low_resolution_complete.RData')
-# index=lapply(regionsFeatures@regions,function(region) seqnames(region)=='chrX')
-# regionsFeatures@metadata$region_datasets$size=unlist(lapply(index,sum))
-# regionsFeatures@regions=GRangesList(mapply(function(region,ind) region[ind,],regionsFeatures@regions,index,SIMPLIFY=FALSE))
-# regionsFeatures@features=lapply(regionsFeatures@features,function(feature) mapply(function(feat,ind) t(as.matrix(feat[,which(ind)])),feature,index,SIMPLIFY=FALSE))
-# regionsFeatures@length_features=lapply(regionsFeatures@length_features,function(feature) mapply(function(feat,ind) feat[which(ind)],feature,index,SIMPLIFY=FALSE))
-# validObject(regionsFeatures)
-# # number of windows in each dataset
-# lengthRegions(regionsFeatures)
-# save(regionsFeatures,file='L1_low_resolution_chrX.RData')
-
-
-
-
-
-
-
-
-
-
-
-
-
 ######################
 ### ONLY AUTOSOMES ###
 ######################
@@ -209,9 +181,6 @@ for(idFeature in idFeatures(regionsFeatures)){
   points(1:4,means)
 }
 dev.off()
-
-
-
 
 
 # clustering using spearman correlation
@@ -301,16 +270,7 @@ features_plot=matrix(unlist(lapply(regionsFeatures["Control",]@features,unlist))
 colnames(features_plot)=idFeatures(regionsFeatures)
 clustering_pearson(features_plot,"_low_resolution_controls",h=0.2,labels=nameFeatures(regionsFeatures))
 
-
-
-
-
-
-
-
-
-
-#################### test ####################
+#################### IWTomics test ####################
 M=matrix(NA,nrow=nRegions(regionsFeatures),ncol=nRegions(regionsFeatures))
 rownames(M)=idRegions(regionsFeatures)
 colnames(M)=idRegions(regionsFeatures)
@@ -341,81 +301,87 @@ for(idFeature in idFeatures(regionsFeatures)){
 }
 save(result_mean,file='L1_low_resolution_results_mean.RData')
 
-result_median=rep(M,nFeatures(regionsFeatures))
-names(result_median)=idFeatures(regionsFeatures)
-for(idFeature in idFeatures(regionsFeatures)){
-  message(nameFeatures(regionsFeatures)[idFeature])
-  message('De novo vs Control')
-  result_median[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][1,4])
-  message('Polymorphic vs Control')
-  result_median[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][2,4])
-  message('Human specific vs Control')
-  result_median[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][3,4])
-  message('De novo vs Polymorphic')
-  result_median[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][1,2])
-  message('De novo vs Human specific')
-  result_median[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][1,3])
-  message('Polymorphic vs Human specific')
-  result_median[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="median",B=10000)$result$unadjusted_pval
-  message(result_median[[idFeature]][2,3])
-}
-save(result_median,file='L1_low_resolution_results_median.RData')
+result_mean$Dis_Telo
+result_mean$Dis_Cent
+result_mean$Rep_Timing
+result_mean$Average_Recom_Rate
+result_mean$Telomere_Hexamer
 
-result_variance=rep(M,nFeatures(regionsFeatures))
-names(result_variance)=idFeatures(regionsFeatures)
-for(idFeature in idFeatures(regionsFeatures)){
-  message(nameFeatures(regionsFeatures)[idFeature])
-  message('De novo vs Control')
-  result_variance[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][1,4])
-  message('Polymorphic vs Control')
-  result_variance[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][2,4])
-  message('Human specific vs Control')
-  result_variance[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][3,4])
-  message('De novo vs Polymorphic')
-  result_variance[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][1,2])
-  message('De novo vs Human specific')
-  result_variance[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][1,3])
-  message('Polymorphic vs Human specific')
-  result_variance[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="variance",B=10000)$result$unadjusted_pval
-  message(result_variance[[idFeature]][2,3])
-}
-save(result_variance,file='L1_low_resolution_results_variance.RData')
-
-result_quantile=rep(M,nFeatures(regionsFeatures))
-names(result_quantile)=idFeatures(regionsFeatures)
-for(idFeature in idFeatures(regionsFeatures)){
-  message(nameFeatures(regionsFeatures)[idFeature])
-  message('De novo vs Control')
-  result_quantile[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][1,4])
-  message('Polymorphic vs Control')
-  result_quantile[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][2,4])
-  message('Human specific vs Control')
-  result_quantile[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][3,4])
-  message('De novo vs Polymorphic')
-  result_quantile[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][1,2])
-  message('De novo vs Human specific')
-  result_quantile[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][1,3])
-  message('Polymorphic vs Human specific')
-  result_quantile[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
-  message(result_quantile[[idFeature]][2,3])
-}
-save(result_quantile,file='L1_low_resolution_results_quantile_90.RData')
-
+# result_median=rep(M,nFeatures(regionsFeatures))
+# names(result_median)=idFeatures(regionsFeatures)
+# for(idFeature in idFeatures(regionsFeatures)){
+#   message(nameFeatures(regionsFeatures)[idFeature])
+#   message('De novo vs Control')
+#   result_median[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][1,4])
+#   message('Polymorphic vs Control')
+#   result_median[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][2,4])
+#   message('Human specific vs Control')
+#   result_median[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][3,4])
+#   message('De novo vs Polymorphic')
+#   result_median[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][1,2])
+#   message('De novo vs Human specific')
+#   result_median[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][1,3])
+#   message('Polymorphic vs Human specific')
+#   result_median[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="median",B=10000)$result$unadjusted_pval
+#   message(result_median[[idFeature]][2,3])
+# }
+# save(result_median,file='L1_low_resolution_results_median.RData')
+# 
+# result_variance=rep(M,nFeatures(regionsFeatures))
+# names(result_variance)=idFeatures(regionsFeatures)
+# for(idFeature in idFeatures(regionsFeatures)){
+#   message(nameFeatures(regionsFeatures)[idFeature])
+#   message('De novo vs Control')
+#   result_variance[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][1,4])
+#   message('Polymorphic vs Control')
+#   result_variance[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][2,4])
+#   message('Human specific vs Control')
+#   result_variance[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][3,4])
+#   message('De novo vs Polymorphic')
+#   result_variance[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][1,2])
+#   message('De novo vs Human specific')
+#   result_variance[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][1,3])
+#   message('Polymorphic vs Human specific')
+#   result_variance[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="variance",B=10000)$result$unadjusted_pval
+#   message(result_variance[[idFeature]][2,3])
+# }
+# save(result_variance,file='L1_low_resolution_results_variance.RData')
+# 
+# result_quantile=rep(M,nFeatures(regionsFeatures))
+# names(result_quantile)=idFeatures(regionsFeatures)
+# for(idFeature in idFeatures(regionsFeatures)){
+#   message(nameFeatures(regionsFeatures)[idFeature])
+#   message('De novo vs Control')
+#   result_quantile[[idFeature]][1,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][1,4])
+#   message('Polymorphic vs Control')
+#   result_quantile[[idFeature]][2,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][2,4])
+#   message('Human specific vs Control')
+#   result_quantile[[idFeature]][3,4]=test_scalar(features(regionsFeatures)[[idFeature]]$L1HS,features(regionsFeatures)[[idFeature]]$Control,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][3,4])
+#   message('De novo vs Polymorphic')
+#   result_quantile[[idFeature]][1,2]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1Pol,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][1,2])
+#   message('De novo vs Human specific')
+#   result_quantile[[idFeature]][1,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1denovo,features(regionsFeatures)[[idFeature]]$L1HS,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][1,3])
+#   message('Polymorphic vs Human specific')
+#   result_quantile[[idFeature]][2,3]=test_scalar(features(regionsFeatures)[[idFeature]]$L1Pol,features(regionsFeatures)[[idFeature]]$L1HS,statistics="quantile",probs=0.9,B=10000)$result$unadjusted_pval
+#   message(result_quantile[[idFeature]][2,3])
+# }
+# save(result_quantile,file='L1_low_resolution_results_quantile_90.RData')
+# 
 
 
 

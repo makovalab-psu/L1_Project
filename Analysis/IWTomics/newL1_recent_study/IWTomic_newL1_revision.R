@@ -1,7 +1,7 @@
 require(IWTomics)
 require(dendextend)
 
-setwd("/Users/Bruce/Google_Drive/L1/L1_Manuscript/L1_Draft/MBE_Revision/Analysis/IWT_Revision/")
+setwd("~/Google_Drive/L1_Project/Analysis/IWTomics/IWT_newL1_datasets/")
 #setwd("/Users/Bruce/Desktop/L1/IWTomics analysis_1000control_1000denovo")
 
 # Read files with datasets and features
@@ -40,7 +40,7 @@ load('L1_autosomes_new_revision.RData')
 # select only feature we want to analyze
 idFeatures_select=c("H2AFZ_signal","H3K27ac_signal","H4K20me1_signal","H3K36me3_signal","H3K4me1_signal",
                     "H3K4me2_signal","H3K4me3_signal","H3K79me2_signal","H3K9ac_signal","H3K9me3_signal",
-                    "H3K27me3_signal","CTCF_signal","DNase_DHS_signal")#,"cpg_meth")
+                    "H3K27me3_signal","CTCF_signal","DNase_DHS_signal")
 regionsFeatures=regionsFeatures[,idFeatures_select]
 
 # number of 0 in the different features
@@ -268,21 +268,21 @@ save(result_mean,file='L1_autosomes_results_smoothed_mean_new_revision_direction
 features_reordered_revision<-read.table("features_reordered_revision.txt",header=FALSE)$V1
 features_reordered_revision_ready<-as.vector(features_reordered_revision)
 
-#Summary by test, scale=100
-plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("L1denovoFlasch_control","L1denovoSultana_control","hs_L1denovoFlasch","hs_L1denovoSultana"),".pdf"),
-            id_features_subset=features_reordered_revision_ready,
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
+# #Summary by test, scale=100
+# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
+#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("L1denovoFlasch_control","L1denovoSultana_control","hs_L1denovoFlasch","hs_L1denovoSultana"),".pdf"),
+#             id_features_subset=features_reordered_revision_ready,
+#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
 #Summary by test, scale=10
 plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',scale_threshold=10,
             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("L1denovoFlasch_control","L1denovoSultana_control","hs_L1denovoFlasch","hs_L1denovoSultana"),"_scale10.pdf"),
             id_features_subset=features_reordered_revision_ready,
             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
 
-#Summary by features, scale=100
-plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
+# #Summary by features, scale=100
+# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
+#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
+#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
 #Summary by features, scale=10
 plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',scale_threshold=10,
             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),

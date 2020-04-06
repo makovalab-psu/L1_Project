@@ -1,0 +1,30 @@
+> result_mean$Dis_Telo
+         L1denovo L1Pol   L1HS Control
+L1denovo       NA 1e-04 0.0001  0.1978
+L1Pol          NA    NA 0.5849  0.0001
+L1HS           NA    NA     NA  0.0001
+Control        NA    NA     NA      NA
+> result_mean$Dis_Cent
+         L1denovo  L1Pol   L1HS Control
+L1denovo       NA 0.0038 0.0245  0.9888
+L1Pol          NA     NA 0.5891  0.0232
+L1HS           NA     NA     NA  0.0780
+Control        NA     NA     NA      NA
+> result_mean$Rep_Timing
+         L1denovo L1Pol  L1HS Control
+L1denovo       NA 1e-04 1e-04   1e-04
+L1Pol          NA    NA 7e-04   1e-04
+L1HS           NA    NA    NA   1e-04
+Control        NA    NA    NA      NA
+> result_mean$Average_Recom_Rate
+         L1denovo L1Pol   L1HS Control
+L1denovo       NA 0.348 0.1497  0.5556
+L1Pol          NA    NA 0.7463  0.7342
+L1HS           NA    NA     NA  0.4353
+Control        NA    NA     NA      NA
+> result_mean$Telomere_Hexamer
+         L1denovo L1Pol   L1HS Control
+L1denovo       NA 6e-04 0.0001   1e-04
+L1Pol          NA    NA 0.0526   1e-04
+L1HS           NA    NA     NA   1e-04
+Control        NA    NA     NA      NA

@@ -1,1 +1,4 @@
-IWTomics pipeline for: high-resolution features, low resolution features and additional de novo L1s from recent studies.
+IWTomics pipeline for: 
+- High-resolution features: high_resolution/
+- Low resolution features: low_resolution/
+- Additional de novo L1s from recent studies: newL1_recent_study/

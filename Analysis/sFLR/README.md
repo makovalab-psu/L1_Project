@@ -21,7 +21,7 @@ Sub-folders:
 
 - glm_lowFeatures.R: R pipeline of individual logistic regressions on the 7 low-resolution features, using the transformed data “L1_lowFeatures_transformed_randomr” (r=1:10) as the input. Generally it is similar with the above pipeline for scalar predictors.
 
-# In the subfolder "select_random_samples", there are 1 scripts and 1 RData:
+### In the subfolder "select_random_samples", there are 1 scripts and 1 RData:
 1. selecting_random_sample.R: R scripts for selecting one out of 10 random samples (random 1 was selected)
 2. Select_random1.RData: RData containing selected random sample 1
 

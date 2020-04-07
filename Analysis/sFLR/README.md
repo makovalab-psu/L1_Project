@@ -40,34 +40,11 @@ Sub-folders:
 
 6. ‘low_features_individual_regression_random1.RData’: data image of individual logistic regression on 7 low-resolution features for 6 comparisons. Similar pipeline and scheme as in “5” (the above one for scalar predictors). 
 
-7. 24 tables are the written outputs from 3,4 and 6, with each comparison written separately : 
+7. 24 tables are the written outputs from steps 3,4 and 6, with each comparison written separately : 
 
-comp1_func_logit_sum.txt
-comp2_func_logit_sum.txt
-comp3_func_logit_sum.txt
-comp4_func_logit_sum.txt
-comp5_func_logit_sum.txt
-comp6_func_logit_sum.txt
-
-comp1_func_logit_coefficients.txt
-comp2_func_logit_coefficients.txt
-comp3_func_logit_coefficients.txt
-comp4_func_logit_coefficients.txt
-comp5_func_logit_coefficients.txt
-comp6_func_logit_coefficients.txt
-
-comp1_scalar_logit_sum.txt
-comp2_scalar_logit_sum.txt
-comp3_scalar_logit_sum.txt
-comp4_scalar_logit_sum.txt
-comp5_scalar_logit_sum.txt
-comp6_scalar_logit_sum.txt
-
-comp1_lowfeature_logit_sum.txt
-comp2_lowfeature_logit_sum.txt
-comp3_lowfeature_logit_sum.txt
-comp4_lowfeature_logit_sum.txt
-comp5_lowfeature_logit_sum.txt
-comp6_lowfeature_logit_sum.txt
-
+- comp1(2,3,4,5,6)_func_logit_sum.txt
+- comp1(2,3,4,5,6)_func_logit_coefficients.txt
+- comp1(2,3,4,5,6)_scalar_logit_sum.txt
+- comp1(2,3,4,5,6)_lowfeature_logit_sum.txt
+ 
 NOTE: Further analysis should be focused on random sample 1 (files in the folder “random1”), since we selected the sample to be a representative one based on the individual regression results.

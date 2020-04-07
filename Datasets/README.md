@@ -1,7 +1,7 @@
 ### There are 3 interval files in L1_genomic_coodinates folder and 4 interval files in the Flanking_regions folder
 
 ### L1_genomic_coodinates folder (Genomic coordinates of elements from the three L1 datasets)
-- `L1denovo_BWA_17037_reads.bed' (Columns 1-7: Chromsome, Start, End, Strand, Barcode, Restriction site, Overlap)
+- `L1denovo_BWA_17037_reads.bed` (Columns 1-7: Chromsome, Start, End, Strand, Barcode, Restriction site, Overlap)
 - `L1HS_clean_sorted_1205.bed` (Columns 1-5: Chromsome, Start, End, Strand, Overlap)
 - `L1Pol_Ewing_LiftedFromHG18_1012.bed` (Columns 1-5: Chromsome, Start, End, Strand, Overlap)
 

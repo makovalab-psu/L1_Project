@@ -1,4 +1,4 @@
-#The folder contains 4 Rscript files and 2 sub-folders:
+### The folder contains 4 Rscript files and 2 sub-folders:
 
 transformation_all_dataset.R
 func_log_regression_individual.R
@@ -9,7 +9,7 @@ Sub-folders:
 - select_random_samples
 - random1
 
-#Details of files and subfolders
+### Details of files and subfolders
 transformation_all_dataset: R pipeline to transform all the predictors before performing any scalar/functional regression analysis. Transformation was performed for high-resolution (both functional&scalar) predictors, and low-resolution features separately as two files, generating two output files: “L1_transformed_random_r” (r=1:10) and “L1_lowFeatures_transformed_randomr” (r=1:10).
 
 func_log_regression_individual: R pipeline of individual functional logistic regressions on functional predictors, using the transformed data “L1_transformed_random_r” (r=1:10) as input. The package ‘fda.usc’ is used here.
@@ -23,7 +23,7 @@ glm_lowFeatures.R: R pipeline of individual logistic regressions on the 7 low-re
 2. Select_random1.RData: RData containing selected random sample 1
 
 
-#In the subfolder "random1", there are 4 RData and 18 tables, they are:
+### In the subfolder "random1", there are 4 RData and 18 tables, they are:
 1.’L1_autosomes_results_smoothed_mean_1’: random sample generated based on de novo L1s, pre-transformation variables can be found in “result_mean” after loading the data.
 
 2.’L1_transformed_random_1.RData’: transformed variables for random sample 1, post-transformation variables can be found in “result_mean” after loading the data.

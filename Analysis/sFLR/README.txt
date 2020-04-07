@@ -1,4 +1,4 @@
-There are 4 Rscript files and 2 sub-folders:
+The folder contains 4 Rscript files and 2 sub-folders:
 
 transformation_all_dataset.R
 func_log_regression_individual.R

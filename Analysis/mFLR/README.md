@@ -10,5 +10,16 @@
 
 - `localization_table_LowFeatures.txt`: table indicating which low-resolution features must be included in the mFLR model as *scalar* predictors. Input to the main R script for mFLR.
 
-Sub-folder:
-- `random1`:
+### In the subfolder `random1`, there are 2 RData and 6 pdf files:
+1. `L1_transformed_random_1.RData`: transformed variables for random sample 1, post-transformation variables can be found in “result_mean” after loading the data.
+(the raw files, plots and transformation pipeline can be find at folder:`L1/transformed_data` on google drive).
+
+2. `L1_lowFeatures_transformed_random1.RData`: transformed variables for 7 low-resolution features random sample 1, post-transformation variables can be found in “regionsFeatures” after loading the data.
+
+3. 6 pdf files are the BIC and classification error plots used to select the tuning parameter in the feature selections, with each comparison written separately: 
+- `comp1_feature_selection_type1.pdf`
+- `comp2_feature_selection_type1.pdf`
+- `comp3_feature_selection_type1.pdf`
+- `comp4_feature_selection_type1.pdf`
+- `comp5_feature_selection_type1.pdf`
+- `comp6_feature_selection_type1.pdf`

@@ -1,8 +1,11 @@
 ### The folder contains 4 R script files and 2 sub-folders:
 
 `transformation_all_dataset.R`
+
 `func_log_regression_individual.R`
+
 `glm_scalar_no_lowFeatures.R`
+
 `glm_lowFeatures.R`
 
 Sub-folders:

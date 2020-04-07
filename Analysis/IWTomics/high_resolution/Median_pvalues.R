@@ -8,10 +8,9 @@ require(parallel)
 library(nws)
 library(plyr)
 
-# ########################################
-# #### selecting median pvalues from 10 random results ####
-# ##############################################
-# 
+# ##################################################################
+# #### selecting median pvalues from 10 random results (not shown)##
+# ##################################################################
 # for (r in 1:10){
 #   file=paste('L1_autosomes_results_smoothed_mean_', r, '.RData', sep="")
 #   load(file)
@@ -36,7 +35,7 @@ library(plyr)
 # head(pval_random_max[[i]][[j]])
 
 # #Select the median out of 10 randoms 
-# setwd("~/Desktop/IWT/cleanControl_pvalues/median/")
+# setwd("~/Desktop/IWT/cleanControl_pvalues/median_scaled//")
 # pval_random_median <- pval_random_1
 # 
 # #install.packages("abind")
@@ -72,46 +71,10 @@ library(plyr)
 
 ### Load IWTomics data object with median p-values across random samples
 load('L1_autosomes_results_smoothed_mean_alldennovo_median_final.RData')
-setwd('median/')
-pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
-plotTest(result_mean,col=c('red','blue','green','black'),
-         scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)
-dev.off()
+## Change working directory to "median/", in which the IWTomics test scales were updated for each feature in all six comparisons
+setwd('~/Google_Drive/L1_Project/Analysis/IWTomics/high_resolution/median_scaled/')
 
-
-plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),".pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',scale_threshold=10,
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),"_scale10.pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',scale_threshold=10,
-            filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-
-#load('L1_autosomes_results_smoothed_mean_alldennovo_median.RData')
-setwd('~/Desktop/IWT/cleanControl_pvalues/median/scale_selection_plots/')
-# pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
-# plotTest(result_mean,col=c('red','blue','green','black'),
-#          scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)
-# dev.off()
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-
-####### Scale selection (updated Feb28, 2018) ##################################
+####### Scale selection for each of the six pairwise comparison###############
 scale_threshold=list(test1=c(100,100,10,4,100,
                              16,16,100,4,100,
                              8,100,4,4,10,
@@ -185,8 +148,8 @@ plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xl
 
 ## Select the scales based on the IWT heatmap (transformed) and boxplot by each test, 
 ## then replace the scale vector in the pipeline above
-setwd("~/Desktop/IWT/cleanControl_pvalues/median/scale_selection_plots/")
-# test1
+setwd("~/Google_Drive/L1_Project/Analysis/IWTomics/high_resolution/median_scaled/")
+# test1: de novo L1 vs control
 test=1
 result_mean1=result_mean
 result_mean1@test$input$id_region1=result_mean1@test$input$id_region1[test]
@@ -217,7 +180,7 @@ plotTest(result_mean1,col=c('red','blue','green','black'),
          scale_threshold=scale_threshold,ask=FALSE)
 dev.off()
 
-##test2
+##test2: polymorphic L1 vs control
 test=2
 result_mean2=result_mean
 result_mean2@test$input$id_region1=result_mean2@test$input$id_region1[test]
@@ -248,7 +211,7 @@ plotTest(result_mean2,col=c('red','blue','green','black'),
          scale_threshold=scale_threshold,ask=FALSE)
 dev.off()
 
-##test3
+##test3: L1HS vs control
 test=3
 result_mean3=result_mean
 result_mean3@test$input$id_region1=result_mean3@test$input$id_region1[test]
@@ -279,7 +242,7 @@ plotTest(result_mean3,col=c('red','blue','green','black'),
          scale_threshold=scale_threshold,ask=FALSE)
 dev.off()
 
-##test4
+##test4: de novo L1 vs polymorphic L1
 test=4
 result_mean4=result_mean
 result_mean4@test$input$id_region1=result_mean4@test$input$id_region1[test]
@@ -310,7 +273,7 @@ plotTest(result_mean4,col=c('red','blue','green','black'),
          scale_threshold=scale_threshold,ask=FALSE)
 dev.off()
 
-##test5
+##test5: de novo L1 vs L1HS
 test=5
 result_mean5=result_mean
 result_mean5@test$input$id_region1=result_mean5@test$input$id_region1[test]
@@ -341,7 +304,7 @@ plotTest(result_mean5,col=c('red','blue','green','black'),
          scale_threshold=scale_threshold,ask=FALSE)
 dev.off()
 
-##test6
+##test6: polymorphic L1 vs L1HS
 test=6
 result_mean6=result_mean
 result_mean6@test$input$id_region1=result_mean6@test$input$id_region1[test]

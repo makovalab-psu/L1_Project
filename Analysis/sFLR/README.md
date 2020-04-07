@@ -29,7 +29,7 @@ Sub-folders:
 
 
 ### In the subfolder "random1", there are 4 RData and 18 tables:
-1. `L1_autosomes_results_smoothed_mean_1`: random sample generated based on de novo L1s, pre-transformation variables can be found in “result_mean” after loading the data.
+1. `L1_autosomes_results_smoothed_mean_1.RData`: random sample generated based on de novo L1s, pre-transformation variables can be found in “result_mean” after loading the data.
 
 2. `L1_transformed_random_1.RData`: transformed variables for random sample 1, post-transformation variables can be found in “result_mean” after loading the data.
 (the raw files, plots and transformation pipeline can be find at folder:`L1/transformed_data` on google drive).

@@ -1,6 +1,6 @@
 #!/bin/env Rscript
 #install.packages("dendextend")
-setwd("~/Google_Drive/L1_Project/Analysis/IWTomics/high_resolution/median")
+setwd("~/Google_Drive/L1_Project/Analysis/IWTomics/high_resolution")
 require(IWTomics)
 require(dendextend)
 require(parallel)
@@ -64,17 +64,15 @@ library(plyr)
 # head(pval_random_2[[1]][[1]]$adjusted_pval_matrix)
 # head(pval_random_median[[1]][[1]]$adjusted_pval_matrix)
 # 
-# ####Replace the original matrices with the ones in pval_random_median
-# 
-# load('L1_autosomes_results_smoothed_mean_alldenovo.RData')
-# # head(t)
-# # dim(t)
-# result_mean@test$result<-pval_random_median
-# save(result_mean,file='L1_autosomes_results_smoothed_mean_alldennovo_median.RData')
+####Replace the original matrices for ramdom sample 1 (not shown) with the ones in pval_random_median
+#load('L1_autosomes_results_smoothed_mean_1.RData')
+#load('L1_autosomes_results_smoothed_mean_alldenovo.RData')
+#result_mean@test$result<-pval_random_median
+#save(result_mean,file='L1_autosomes_results_smoothed_mean_alldennovo_median_final.RData')
 
 ### Load IWTomics data object with median p-values across random samples
-load('L1_autosomes_results_smoothed_mean_alldennovo_median.RData')
-setwd('median_plots_pre-scale/')
+load('L1_autosomes_results_smoothed_mean_alldennovo_median_final.RData')
+setwd('median/')
 pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
 plotTest(result_mean,col=c('red','blue','green','black'),
          scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)

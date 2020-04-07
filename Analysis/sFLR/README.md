@@ -40,7 +40,7 @@ Sub-folders:
 
 6. ‘low_features_individual_regression_random1.RData’: data image of individual logistic regression on 7 low-resolution features for 6 comparisons. Similar pipeline and scheme as in “5” (the above one for scalar predictors). 
 
-7. 24 tables are the written outputs from steps 3,4 and 6, with each comparison written separately : 
+7. 24 tables are the written outputs from steps 3, 4 and 6 (above), with each comparison written separately : 
 
 - comp1(2,3,4,5,6)_func_logit_sum.txt
 - comp1(2,3,4,5,6)_func_logit_coefficients.txt

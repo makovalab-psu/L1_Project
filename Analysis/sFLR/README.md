@@ -1,4 +1,4 @@
-### The folder contains 4 Rscript files and 2 sub-folders:
+### The folder contains 4 R script files and 2 sub-folders:
 
 transformation_all_dataset.R
 

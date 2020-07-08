@@ -1,7 +1,7 @@
 ### Pipeline for additional analysis of: 
-1. Restriction enzyme MSPI and TaqI sites (sub-folder `Enzyme_site_analysis/`)
-2. L1 target motifs: (sub-folder `L1_target_motif_analysis/`)
-3. Genome-wide polyA/T distribution: (sub-folder `PolyAT_analysis/`)
+1. Restriction enzyme MSPI and TaqI sites (`Enzyme_site_analysis/`)
+2. L1 target motifs: (`L1_target_motif_analysis/`)
+3. Genome-wide polyA/T distribution: (`PolyAT_analysis/`)
 
 #### Enzyme_site_analysis/
 - The folder contains 2 subfolders: `Clustering/` and `Enzyme_site_distribution/`

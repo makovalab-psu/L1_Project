@@ -10,7 +10,7 @@
 
 #### L1_target_motif_analysis/
 - The folder contains 2 subfolders: `Distance_L1_target/` and `IWT_L1_target/`
-- `Distance_L1_target/` contains the scripts and RData for the analysis of distances between estimated de novo L1 insertions and concensus target motifs 
+- `Distance_L1_target/` contains the scripts and RData for the analysis of distances between estimated de novo L1 insertions (both the complete and strigently filtered sets) and concensus target motifs 
 - `IWT_L1_target/` contains the scripts and processed Rdata object for IWTomics test of L1 target motifs on the strigently filtered de novo L1 dataset
 
 #### PolyAT_analysis/

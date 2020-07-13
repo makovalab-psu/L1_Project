@@ -1,5 +1,5 @@
 ####################################################################################################
-##5. Analyze genome-wide distribution of polyA/T sequences (>15 bp)##
+#Analyze genome-wide distribution of polyA/T sequences (>15 bp)##
 ####################################################################################################
 
 #####Examined the number of the de novo L1 element reads and their 1-kb flanks that overlap with the genomic polyA/T sequences #####

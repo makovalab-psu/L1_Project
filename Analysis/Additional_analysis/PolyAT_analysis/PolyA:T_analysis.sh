@@ -21,11 +21,14 @@ cat L1denovo_BWA_17037_reads.bed | cut -f1,2,3,4 | awk '{ if ($4 == "+") print $
 
 #Overlap bettwem de novo L1s (all 17037) and polyA
 cat L1denovo_BWA_17037_reads.bed | cut -f1,2,3,4 | bedtools coverage -a stdin -b polyA_hg19_clean_sorted.bed > cov_denovo_polyA.bed
+wc -l L1denovo_BWA_17037_reads.bed
+#17037
 cat cov_denovo_polyA.bed | awk '{ if ($8 != 0) print $0}' | wc -l
 #7
 
 #Overlap bettwem de novo L1 1-kb flanks and polyA
 cat L1denovo_BWA_17037_reads.bed | cut -f1,2,3,4 | awk '{ print $1"\t"($2-500)"\t"($3+500)"\t"$4}' | sortBed > L1denovo_BWA_17037_1kb_flanks.bed
 wc -l L1denovo_BWA_17037_1kb_flanks.bed
+#17037
 bedtools coverage -a L1denovo_BWA_17037_1kb_flanks.bed -b polyA_hg19_clean_sorted.bed | awk '{ if ($8 != 0) print $0}' | wc -l
 #207
